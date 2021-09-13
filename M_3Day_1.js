@@ -1,8 +1,8 @@
-/**
- * /* 1. Create a function to calculate the sum of the two given integers. If the two values are the same, return triple their sum.
- *
- * @format
- */
+/** * @format*/
+
+/*--------------------------------------------Homework--------------------------------------------------------*/
+
+/* 1. Create a function to calculate the sum of the two given integers. If the two values are the same, return triple their sum.*/
 
 function sum(x, y) {
 	if (x === y) {
@@ -11,11 +11,10 @@ function sum(x, y) {
 		console.log(x + y);
 	}
 }
-
 sum(2, 2);
 sum(2, 3);
 
-/* 2. Create a function to check two given integers. Return `true` if one of them is 50 or if their sum is 50. */
+/* 2. Create a function to check two given integers. Return `true` if one of them is 50 or if their sum is 50.
 
 function numcheck(x, y) {
 	if (typeof x == 'number' && typeof y == 'number') {
@@ -65,7 +64,7 @@ function range(x, y) {
 	}
 }
 
-/*---------------------------------------------------------------------------------------*/
+/*--------------------------------------------Homework ADV--------------------------------------------------------*/
 
 /* 1. Given a string (as a parameter), return the character that is most commonly used. */
 function common(str) {
