@@ -126,6 +126,117 @@ function test(val) {
 test([25, 1]);
 test([25, 78]);
 
+/* 11. Create a function to find the longest string from a given array of strings. 
+    Pass the array as parameter and return the longest string. */
+function longest(array) {
+	let text = '';
+	let longval = 0;
+	for (let i = 0; i < array.length; i++) {
+		if (array[i].length > longval) {
+			longval = array[i].length;
+			text = array[i];
+		}
+	}
+	console.log(longval);
+	console.log(text);
+}
+longest(['a', 'function', 'to', 'find', 'and', 'return', 'the', 'index']);
+
+/* 12. Create a function to find the types of a given angle:
+   1. Acute angle â‡’ between 0 and 90 degrees. Return `acute`.
+    2. Right angle â‡’ 90 degree. Return `right`
+     3. Obtuse angle â‡’ between 90 and 180. Return `obtuse`
+     4. Straight angle â‡’ 180 degrees. Return `straight`
+
+    Pass the angle as a parameter.
+*/
+
+function angletype(angle) {
+	if (angle < 90) {
+		console.log('acute');
+	} else if (angle == 90) {
+		console.log('right');
+	} else if (angle > 90 && angle < 180) {
+		console.log('obtuse');
+	} else if (angle == 180) {
+		console.log('straight');
+	}
+}
+
+/* 13. Create a function to find and return the index of the greatest element of a given array of integers that you passed as a parameter. */
+let x = [12, 5, 4, 8, 95, 6, 40, 55];
+function index(num) {
+	let val = num.indexOf(Math.max(...num));
+	console.log(val);
+}
+index(x);
+
+/* 14. Create a function to find and return the largest **even** number from an array of integers that is passed a parameter. */
+let x = [12, 5, 4, 8, 95, 60, 4, 52];
+maxeven(x);
+function maxeven(arra) {
+	let even = [];
+	for (var i = 0; i < arra.length; i++) {
+		if (arra[i] % 2 == 0) even.push(arra[i]);
+	}
+	console.log(Math.max(...even));
+}
+
+/* 15. Create a function to check from two given integers (passed as parameters) if one is positive and the other is negative.
+     Return `true` if that's the case, return `false` if it's not. */
+function posneg(x, y) {
+	if ((x < 0 && y > 0) || (x > 0 && y < 0)) {
+		console.log(true);
+	} else {
+		console.log(false);
+	}
+}
+posneg(-5, 6);
+
+/* 16. Create a function to create and return a new string where the first 3 characters and in lower case and the others are in upper case.
+     If the string's length is less than 3, convert the whole string into uppercase. Pass the original string as a parameter. */
+
+function capital(str) {
+	if (str.length < 3) {
+		str.toUpperCase();
+	} else {
+		console.log(str.slice(0, 3).toLowerCase() + str.slice(3).toUpperCase());
+	}
+}
+capital('toLowerCase');
+
+/* 17. Create a function to calculate the sum of two integers (passed as parameters).
+     If the sum is in the 50-80 range, return `65`, otherwise, return `80`. */
+
+function sum(x, y) {
+	x + y > 50 && x + y < 80 ? console.log(65) : console.log(80);
+}
+sum(10 + 10);
+sum(10 + 50);
+
+// /* 18. Create a function to convert a number (passed as a parameter) into a string, basing yourself on this example:
+//     The number has 3 as a factor â‡’ return `Diego`
+//     The number has 5 as a factor â‡’ return `Riccardo`
+//     The number has 7 as a factor â‡’ return `Stefano`
+//     If the number does not have 3,5, or 7, return the original number.
+//     âš ï¸ The factor is an integer which evenly divides a number without leaving a remainder. One number can have more than one factor, in that case you should return both names.
+// Ex. 15 has both 3 and 5 has factors: the function will return `DiegoRiccardo` */
+
+/* 19. Create a function that that takes a phrase as a parameter and returns its acronym.
+Ex. British Broadcasting Corporation returns `BBC` */
+function acronym(str) {
+	let x = str.split(' ');
+	let acr = [];
+	console.log(x);
+	for (let i of x) {
+		for (let j of i[0]) {
+			acr.push(j[0]);
+		}
+	}
+	console.log(acr.join(''));
+}
+acronym('British Broadcasting Corporation');
+
 /*--------------------------------------------Homework ADV--------------------------------------------------------*/
 
 /* 1. Given a string (as a parameter), return the character that is most commonly used. */
