@@ -286,34 +286,24 @@ anagrams('maracfy', 'aarfmsc');
 
 /* 4. Given a string (as parameter), return `true` if the string is a palindrome or `false` if it is not. Include spaces and punctuation. */
 
-function palindrome(text, text1) {
-	let a = text.toLowerCase().split('').sort();
-	let b = text1.toLowerCase().split('').sort();
-	if (a.length == b.length) {
-		for (let i of a) {
-			if (a[i] === b[i]) {
-				console.log(true);
-				break;
-			} else {
-				console.log(false);
-				break;
-			}
-		}
+function palindrome(text) {
+	let a = text.toLowerCase().replace(/[\W_]/g, '');
+	let b = a.split('').reverse().join('');
+	if (a === b) {
+		console.log(true);
 	} else {
 		console.log(false);
 	}
 }
+palindrome('Madam');
+
 /* 5. Given an integer (as parameter), return an integer which digitas are the same as the original number, but reversed.
     Ex: 189 â‡’ 981 
 */
-
-function reversed(x) {
-	let y;
-	for (let i = x.length; (i = 0); i--) {
-		y.push(x[i]);
-	}
+function reversed(num) {
+	console.log(num.split('').reverse().join(''));
 }
-reversed(1);
+reversed('123');
 
 /* 6. Write a function that takes a positive number X as a parameter. The function should output (as console.log) a step shaped 
 string with X level usign the `#` character. Make sure the steps are on the right hand side:
