@@ -221,6 +221,18 @@ sum(10 + 50);
 //     If the number does not have 3,5, or 7, return the original number.
 //     âš ï¸ The factor is an integer which evenly divides a number without leaving a remainder. One number can have more than one factor, in that case you should return both names.
 // Ex. 15 has both 3 and 5 has factors: the function will return `DiegoRiccardo` */
+function factor(num) {
+	if (num % 3 === 0) {
+		console.log('Diego');
+	} else if (num % 5 === 0) {
+		console.log('Riccardo');
+	} else if (num % 7 === 0) {
+		console.log('Stefano');
+	} else {
+		console.log(num);
+	}
+}
+factor(15);
 
 /* 19. Create a function that that takes a phrase as a parameter and returns its acronym.
 Ex. British Broadcasting Corporation returns `BBC` */
@@ -283,9 +295,6 @@ anagrams('maracfy', 'aarfmsc');
 /* 3. Given a word and a list of possible anagrams (both passed as parameters), return the correct list of anagrams: 
     Ex. "listen" is the word, ["enlist", "google", "inlets"] are the possibilities: the output should be ["enlist", "inlets"]
 */
-
-
-
 
 /* 4. Given a string (as parameter), return `true` if the string is a palindrome or `false` if it is not. Include spaces and punctuation. */
 
