@@ -1,0 +1,121 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+			integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+			crossorigin="anonymous"
+		/>
+		<title>APIs</title>
+	</head>
+
+	<body>
+		<h1>🎵Strivify</h1>
+		<button class="btn btn-primary" onclick="loadBooks()">Metallica</button>
+		<button class="btn btn-primary" onclick="loadBooks1()">50Cent</button>
+		<button class="btn btn-primary" onclick="loadBooks2()">Rihanna</button>
+		<div class="container">
+			<div class="row"></div>
+		</div>
+
+		<script
+			src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+			integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+			crossorigin="anonymous"
+		></script>
+		<script>
+			const loadBooks = () => {
+				fetch('https://deezerdevs-deezer.p.rapidapi.com/search?q=metallica', {
+					method: 'GET',
+					headers: {
+						'x-rapidapi-host': 'deezerdevs-deezer.p.rapidapi.com',
+						'x-rapidapi-key':
+							'320f7ced2bmsh2d8b8affc393554p121dadjsn82ed48bae4be',
+					},
+				})
+					.then((response) => response.json())
+					.then((responseParsed) => {
+						const row = document.querySelector('.row');
+						let object = responseParsed.data[0].album.cover_small;
+						let obj = responseParsed.data[0].title;
+						console.log(object);
+						console.log(obj);
+						const col = document.createElement('div');
+						col.innerHTML = ` <div class="card">
+			                 <img src="${object}" class="card-img-top" alt="...">
+			                 <div class="card-body">
+			                     <p class="card-text">${obj}€</p>
+			                 </div>
+			             </div>`;
+						row.appendChild(col);
+					})
+					.catch((err) => {
+						console.error(err);
+					});
+			};
+			// const loadBooks1 = () => {
+			// 	fetch('https://deezerdevs-deezer.p.rapidapi.com/search?q=50%20cent', {
+			// 		method: 'GET',
+			// 		headers: {
+			// 			'x-rapidapi-host': 'deezerdevs-deezer.p.rapidapi.com',
+			// 			'x-rapidapi-key':
+			// 				'320f7ced2bmsh2d8b8affc393554p121dadjsn82ed48bae4be',
+			// 		},
+			// 	})
+			//         .then((response) => response.json())
+			// 		.then((responseParsed) => {
+			// 			const row = document.querySelector('.row');
+			//                      let object = responseParsed.data[0].album.cover_small
+			//                      let obj = responseParsed.data[0].title
+			//                      console.log(object);
+			//                      console.log(obj);
+			//                      const col = document.createElement('div');
+			//                      col.innerHTML = ` <div class="card">
+			//                  <img src="${object}" class="card-img-top" alt="...">
+			//                  <div class="card-body">
+			//                      <p class="card-text">${obj}€</p>
+			//                  </div>
+			//              </div>`
+			//                      row.appendChild(col);
+			// 		})
+			// 		.catch((err) => {
+			// 			console.error(err);
+			// 		});
+			// const loadBooks2 = () => {
+			// 	fetch('https://deezerdevs-deezer.p.rapidapi.com/search?q=rihanna')
+			//              					.then((response) => response.json())
+			// 		.then((responseParsed) => {
+			// 			const row = document.querySelector('.row');
+			//                      let object = responseParsed.data[0].album.cover_small
+			//                      let obj = responseParsed.data[0].title
+			//                      console.log(object);
+			//                      console.log(obj);
+			//                      const col = document.createElement('div');
+			//                      col.innerHTML = ` <div class="card">
+			//                  <img src="${object}" class="card-img-top" alt="...">
+			//                  <div class="card-body">
+			//                      <p class="card-text">${obj}€</p>
+			//                  </div>
+			//              </div>`
+			//                      row.appendChild(col);
+			// 		})
+			// 		.catch((err) => {
+			// 			console.error(err);
+			// 		});
+			// };
+		</script>
+	</body>
+</html>
