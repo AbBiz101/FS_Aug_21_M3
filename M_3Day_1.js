@@ -15,7 +15,7 @@ sum(2, 2);
 sum(2, 3);
 
 /* 2. Create a function to check two given integers. Return `true` if one of them is 50 or if their sum is 50.
-
+ */
 function numcheck(x, y) {
 	if (typeof x == 'number' && typeof y == 'number') {
 		if (x === 50 || y === 50 || x + y === 50) {
@@ -63,6 +63,68 @@ function range(x, y) {
 		console.log(false);
 	}
 }
+
+/* 6. Create a function to create a new string composed of a specified number of copies of a given string. 
+    Pass the string and the number of copies as parameters. */
+function copy(str, num) {
+	for (let i = 0; i < num; i++) {
+		console.log(str);
+	}
+}
+copy('hello', 5);
+
+/* 7. Create a function to display the city name if the string begins with "Los" or "New". 
+    Pass the city name as a parameter. Return `false` if they start with a different string. */
+function cityname(str) {
+	let x = str.toLowerCase();
+	if (x.startsWith('los')) {
+		console.log('Los Angeles');
+	} else if (x.startsWith('new')) {
+		console.log('New York');
+	} else {
+		console.log('No Name');
+	}
+}
+cityname('cal');
+cityname('los');
+
+// /* 8. Create a function to calculate and return the sum of all elements from an array with 3 elements.
+//     Pass the array as a parameter. */
+function sums(array) {
+	let sumofarray;
+	if (array.length === 3) {
+		sumofarray = array.reduce((total, current) => total + current, 0);
+		console.log(sumofarray);
+	} else {
+		console.log('The array lenght is not 3');
+	}
+}
+sums([10, 1, 2]);
+
+/* 9. Create a function to test if an array of lenght 2 contains 1 OR 3.
+    Return `true` is it does, `false` if it doesn't. */
+
+function test(val) {
+	if (val.includes(1) || val.includes(3)) {
+		console.log(true);
+	} else {
+		console.log(false);
+	}
+}
+test([25, 1]);
+test([25, 78]);
+
+/* 10. Create a function to test if an array of lenght 2 DOES NOT contain 1 or 3. 
+     Return `true` if it doesn't, `false` if it does. */
+function test(val) {
+	if (val.includes(1) || val.includes(3)) {
+		console.log(false);
+	} else {
+		console.log(true);
+	}
+}
+test([25, 1]);
+test([25, 78]);
 
 /*--------------------------------------------Homework ADV--------------------------------------------------------*/
 
