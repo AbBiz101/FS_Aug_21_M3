@@ -284,6 +284,9 @@ anagrams('maracfy', 'aarfmsc');
     Ex. "listen" is the word, ["enlist", "google", "inlets"] are the possibilities: the output should be ["enlist", "inlets"]
 */
 
+
+
+
 /* 4. Given a string (as parameter), return `true` if the string is a palindrome or `false` if it is not. Include spaces and punctuation. */
 
 function palindrome(text) {
@@ -301,9 +304,9 @@ palindrome('Madam');
     Ex: 189 â‡’ 981 
 */
 function reversed(num) {
-	console.log(num.split('').reverse().join(''));
+	console.log(num.toString().split('').reverse().join(''));
 }
-reversed('123');
+reversed(123);
 
 /* 6. Write a function that takes a positive number X as a parameter. The function should output (as console.log) a step shaped 
 string with X level usign the `#` character. Make sure the steps are on the right hand side:
@@ -333,6 +336,10 @@ tree(5);
 
 /* 7. Create a function that, given a string as a parameter, returns a new string which is the original string, but reversed: 
 "hello" â‡’ "olleh" */
+function stringreversed(str) {
+	console.log(str.split('').reverse().join(''));
+}
+stringreversed('abcd');
 
 /* 8. Create a function that takes an array and a "chuck size" as parameters. 
     Divide the array into subarrays with the "chunk size" as lenght: 
@@ -349,6 +356,14 @@ Example with X = 3
  '#####'
 ```
 */
+function tree1(x) {
+	for (let i = 0; i <= x; i++) {
+		let star = '#'.repeat(2 * i + 1);
+		let spaceing = ' '.repeat(x - i - 1);
+		console.log(spaceing + star);
+	}
+}
+tree1(4);
 
 /* 10. Write a function that accepts an integer N and returns a NxN spiral matrix:
 Ex: 
