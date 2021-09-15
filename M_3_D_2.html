@@ -16,14 +16,14 @@
 		/>
 		<title>APIs</title>
 	</head>
-
 	<body>
-		<h1>🎵Strivify</h1>
-		<button class="btn btn-primary" onclick="loadBooks()">Metallica</button>
-		<button class="btn btn-primary" onclick="loadBooks1()">50Cent</button>
-		<button class="btn btn-primary" onclick="loadBooks2()">Rihanna</button>
-		<div class="container">
-			<div class="row"></div>
+		<div class="container col-10">
+			<h1>Albums</h1>
+			<div class="row-rihana my-3 d-flex" style="overflow-x: scroll"></div>
+
+			<div class="row-metallica my-3 d-flex" style="overflow-x: scroll"></div>
+
+			<div class="row-eminem my-3 d-flex" style="overflow-x: scroll"></div>
 		</div>
 
 		<script
@@ -37,85 +37,74 @@
 			crossorigin="anonymous"
 		></script>
 		<script>
-			const loadBooks = () => {
-				fetch('https://deezerdevs-deezer.p.rapidapi.com/search?q=metallica', {
-					method: 'GET',
-					headers: {
-						'x-rapidapi-host': 'deezerdevs-deezer.p.rapidapi.com',
-						'x-rapidapi-key':
-							'320f7ced2bmsh2d8b8affc393554p121dadjsn82ed48bae4be',
-					},
-				})
-					.then((response) => response.json())
-					.then((responseParsed) => {
-						const row = document.querySelector('.row');
-						let object = responseParsed.data[0].album.cover_small;
-						let obj = responseParsed.data[0].title;
-						console.log(object);
-						console.log(obj);
-						const col = document.createElement('div');
-						col.innerHTML = ` <div class="card">
-			                 <img src="${object}" class="card-img-top" alt="...">
-			                 <div class="card-body">
-			                     <p class="card-text">${obj}€</p>
-			                 </div>
-			             </div>`;
-						row.appendChild(col);
-					})
-					.catch((err) => {
-						console.error(err);
-					});
-			};
-			// const loadBooks1 = () => {
-			// 	fetch('https://deezerdevs-deezer.p.rapidapi.com/search?q=50%20cent', {
-			// 		method: 'GET',
-			// 		headers: {
-			// 			'x-rapidapi-host': 'deezerdevs-deezer.p.rapidapi.com',
-			// 			'x-rapidapi-key':
-			// 				'320f7ced2bmsh2d8b8affc393554p121dadjsn82ed48bae4be',
-			// 		},
-			// 	})
-			//         .then((response) => response.json())
-			// 		.then((responseParsed) => {
-			// 			const row = document.querySelector('.row');
-			//                      let object = responseParsed.data[0].album.cover_small
-			//                      let obj = responseParsed.data[0].title
-			//                      console.log(object);
-			//                      console.log(obj);
-			//                      const col = document.createElement('div');
-			//                      col.innerHTML = ` <div class="card">
-			//                  <img src="${object}" class="card-img-top" alt="...">
-			//                  <div class="card-body">
-			//                      <p class="card-text">${obj}€</p>
-			//                  </div>
-			//              </div>`
-			//                      row.appendChild(col);
-			// 		})
-			// 		.catch((err) => {
-			// 			console.error(err);
-			// 		});
-			// const loadBooks2 = () => {
-			// 	fetch('https://deezerdevs-deezer.p.rapidapi.com/search?q=rihanna')
-			//              					.then((response) => response.json())
-			// 		.then((responseParsed) => {
-			// 			const row = document.querySelector('.row');
-			//                      let object = responseParsed.data[0].album.cover_small
-			//                      let obj = responseParsed.data[0].title
-			//                      console.log(object);
-			//                      console.log(obj);
-			//                      const col = document.createElement('div');
-			//                      col.innerHTML = ` <div class="card">
-			//                  <img src="${object}" class="card-img-top" alt="...">
-			//                  <div class="card-body">
-			//                      <p class="card-text">${obj}€</p>
-			//                  </div>
-			//              </div>`
-			//                      row.appendChild(col);
-			// 		})
-			// 		.catch((err) => {
-			// 			console.error(err);
-			// 		});
-			// };
+			'use strict';
+
+			const rihanaContainer = document.querySelector('.row-rihana');
+			const metallicaContainer = document.querySelector('.row-metallica');
+			const eminemContainer = document.querySelector('.row-eminem');
+
+			const rihana = new XMLHttpRequest();
+			rihana.open(
+				'GET',
+				'https://striveschool-api.herokuapp.com/api/deezer/search?q=rihana'
+			);
+			rihana.send();
+			rihana.addEventListener('load', function () {
+				const data = JSON.parse(this.responseText);
+				for (let i = 0; i < data.data.length; i++) {
+					let object = data.data;
+					const cent = `<div class="card col-3" style="border-radius:10px; background-color: gray;">
+                     <img class=" mt-2" style="border-radius:10px;"src="${object[i].album.cover_medium}" />
+                     <div class="card-body m-0 p-0">
+                         <h5 class="card-title">${object[i].album.title}</h5>
+                         <p class="card-text">${object[i].artist.name}</p>
+                     </div>
+                   </div>;`;
+					rihanaContainer.insertAdjacentHTML('beforeend', cent);
+				}
+			});
+
+			const metallica = new XMLHttpRequest();
+			metallica.open(
+				'GET',
+				'https://striveschool-api.herokuapp.com/api/deezer/search?q=metallica'
+			);
+			metallica.send();
+			metallica.addEventListener('load', function () {
+				const data = JSON.parse(this.responseText);
+				for (let i = 0; i < data.data.length; i++) {
+					let object = data.data;
+					const cent = `<div class="card col-3" style="border-radius:10px; background-color: gray;">
+                     <img class=" mt-2" style="border-radius:10px;"src="${object[i].album.cover_medium}" />
+                     <div class="card-body">
+                         <h5 class="card-title">${object[i].album.title}</h5>
+                         <p class="card-text">${object[i].artist.name}</p>
+                     </div>
+                   </div>;`;
+					metallicaContainer.insertAdjacentHTML('beforeend', cent);
+				}
+			});
+
+			const eminem = new XMLHttpRequest();
+			eminem.open(
+				'GET',
+				'https://striveschool-api.herokuapp.com/api/deezer/search?q=eminem'
+			);
+			eminem.send();
+			eminem.addEventListener('load', function () {
+				const data = JSON.parse(this.responseText);
+				for (let i = 0; i < data.data.length; i++) {
+					let object = data.data;
+					const cent = `<div class="card col-3" style="border-radius:10px; background-color: gray;">
+                     <img class=" mt-2" style="border-radius:10px;" src="${object[i].album.cover_medium}" />
+                     <div class="card-body">
+                         <h5 class="card-title">${object[i].album.title}</h5>
+                         <p class="card-text">${object[i].artist.name}</p>
+                     </div>
+                   </div>;`;
+					eminemContainer.insertAdjacentHTML('beforeend', cent);
+				}
+			});
 		</script>
 	</body>
 </html>
