@@ -60,7 +60,7 @@
 							const { asin, title, img, price, category } = data[i];
 							const book = document.createElement('div');
 							book.innerHTML = `<div class="book-col col mb-4" onclick="view" style="border-radius: 40%;">
-                                            <div class="card" style="border-radius: 10px; max-height: 700px;">
+                                            <div class="card newcard" style="border-radius: 10px; max-height: 700px;">
                                                 <img class="img-fluid" style="max border-radius: 10px 10px 0 0;" src="${img}" />
                                                 <div class="card-body">
                                                     <h5 class="card-title">Title: ${title}</h5>
@@ -76,11 +76,11 @@
 					});
 			};
 
-			const hide = (e) => {
-				e.target.closest('.book-col').remove();
+			const hide = (val) => {
+				val.target.closest('.book-col').remove();
 			};
-			const style = (e) => {
-				e.target.closest('.card').classList.toggle('newclass');
+			const style = (val) => {
+				val.target.closest('.newcard').classList.toggle('newclass');
 			};
 			window.onload = () => {
 				loadbook();
