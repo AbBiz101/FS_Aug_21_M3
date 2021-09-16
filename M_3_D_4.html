@@ -15,12 +15,21 @@
 			crossorigin="anonymous"
 		/>
 		<title>Book Hello.com</title>
+		<style>
+			body {
+				background-color: rgb(180, 180, 180);
+			}
+			.newclass {
+				max-height: 200px;
+				background-color: rgb(109, 108, 108) !important;
+			}
+		</style>
 	</head>
 	<body>
 		<h1>Book</h1>
-		<input class="ml-4" type="text" />
-
-		<div class="mt-3 ml-4 row row-cols-md-3"></div>
+		<input type="search" placeholder="search..." />
+		<button class="btn btn-primary my-2" onclick="loadbook()">Books</button>
+		<div class="mt-3 ml-4 row row-cols-md-3 d-flex"></div>
 
 		<script
 			src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -33,26 +42,32 @@
 			crossorigin="anonymous"
 		></script>
 		<script>
-			const locatMe = function () {
+			const fetchApi = (type) => {
+				return fetch(
+					'https://striveschool-api.herokuapp.com/books/search?query=' +
+						type.toLowerCase()
+				);
+			};
+
+			const loadbook = function () {
+				const query = document.querySelector('input[type=search]').value;
+
 				fetch(`https://striveschool-api.herokuapp.com/books`)
 					.then((responce) => responce.json())
 					.then((data) => {
 						const blank = document.querySelector('.row');
 						for (let i = 0; i < data.length; i++) {
 							const { asin, title, img, price, category } = data[i];
-							console.log(title);
-							console.log(price);
 							const book = document.createElement('div');
-
-							book.innerHTML = `<div class="col mb-4" onclick="view" style="border-radius:50px">
-                                            <div class="card">
-                                                <img class="img-fluid" src="${img}" />
+							book.innerHTML = `<div class="book-col col mb-4" onclick="view" style="border-radius: 40%;">
+                                            <div class="card" style="border-radius: 10px; max-height: 700px;">
+                                                <img class="img-fluid" style="max border-radius: 10px 10px 0 0;" src="${img}" />
                                                 <div class="card-body">
-                                                    <h5 class="card-title">Card title- ${title}</h5>
-                                                    <p class="card-text1">Category= ${category}</p>
-                                                    <p class="card-text2">Price=${price}€</p>
-                                                    <button class="btn-info">Add to cart</button>
-                                                    <button class="btn-info">Skip</button>
+                                                    <h5 class="card-title">Title: ${title}</h5>
+                                                    <p class="card-text1">Category: ${category}</p>
+                                                    <p class="card-text2">Price:${price}€</p>
+                                                    <button class="btn-info" onclick="style(event)">Add to cart</button>
+                                                    <button class="btn-info hide" onclick="hide(event)" >Skip</button>
                                                 </div>
                                             </div>
                                         </div>`;
@@ -61,7 +76,15 @@
 					});
 			};
 
-			locatMe();
+			const hide = (e) => {
+				e.target.closest('.book-col').remove();
+			};
+			const style = (e) => {
+				e.target.closest('.card').classList.toggle('newclass');
+			};
+			window.onload = () => {
+				loadbook();
+			};
 		</script>
 	</body>
 </html>
