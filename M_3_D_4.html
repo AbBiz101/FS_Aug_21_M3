@@ -21,6 +21,7 @@
 			}
 			.newclass {
 				background-color: rgb(109, 108, 108) !important;
+                border: 2px solid black;
 			}
 		</style>
 	</head>
@@ -51,17 +52,16 @@
 
 			const loadbook = function () {
 				//const query = document.querySelector('input[type=search]').value;
-
 				fetch(`https://striveschool-api.herokuapp.com/books`)
 					.then((responce) => responce.json())
 					.then((data) => {
 						const blank = document.querySelector('.row');
-						console.log(data);
+						//console.log(data);
 						for (let i = 0; i < data.length; i++) {
 							const { asin, title, img, price, category } = data[i];
 							const book = document.createElement('div');
 							book.innerHTML = `<div class="book-col col mb-4" onclick="view" >
-                                            <div class="card newcard" style="border-radius: 10px; max-height: 700px;">
+                                            <div class="card new-card" style="border-radius: 10px; max-height: 700px;">
                                                 <img class="img-fluid" style="max border-radius: 10px 10px 0 0;" src="${img}" />
                                                 <div class="card-body">
                                                     <h5 class="card-title">Title: ${title}</h5>
@@ -81,7 +81,8 @@
 				val.target.closest('.book-col').remove();
 			};
 			const style = (val) => {
-				val.target.closest('.newcard').classList.toggle('newclass');
+				val.target.closest('.new-card').classList.toggle('newclass');
+                console.log(2);
 			};
 			window.onload = () => {
 				loadbook();
