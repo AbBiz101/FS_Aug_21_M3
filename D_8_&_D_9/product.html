@@ -38,7 +38,11 @@
 			</div>
 		</nav>
 
-		<form onsubmit="submitdoc(event)" class="mt-5 col-9 offset-2">
+		<form onsubmit="editdoc(event)" class="mt-5 col-10 offset-2">
+			<div class="col-md-4 mb-3">
+				<label for="validationDefault01">Prodact ID</label>
+				<input type="none" class="form-control" id="form-id" readonly />
+			</div>
 			<div class="form-row">
 				<div class="col-md-4 mb-3">
 					<label for="validationDefault01">Prodact Name</label>
@@ -47,7 +51,6 @@
 						class="form-control"
 						id="form-prodact"
 						placeholder="Prodact-Name"
-						required
 					/>
 				</div>
 				<div class="col-md-4 mb-3">
@@ -57,14 +60,13 @@
 						class="form-control"
 						id="form-brand"
 						placeholder="brand"
-						required
 					/>
 				</div>
 			</div>
 			<div class="mb-0 form-row">
 				<div class="col-md-3 mb-3">
 					<label for="validationDefault04">Image</label>
-					<input type="text" class="form-control" id="form-image" required />
+					<input type="text" class="form-control" id="form-image" />
 				</div>
 				<div class="col-md-2 mb-3">
 					<label for="validationDefault05">Price</label>
@@ -73,7 +75,6 @@
 						class="form-control"
 						id="form-Price"
 						placeholder="10.00€"
-						required
 					/>
 				</div>
 				<div class="col-md-3 mb-3">
@@ -84,15 +85,14 @@
 						id="form-description"
 						cols="30"
 						rows="3"
-						required
 					></textarea>
 				</div>
 			</div>
+			<div class="col-8 d-flex justify-content-between">
+				<button class="btn btn-success btn-edit" type="submit">Edit</button>
+				<button class="btn btn-danger btn-delet" type="button">Delete</button>
+			</div>
 		</form>
-		<div class="col-6 offset-2 d-flex justify-content-between">
-			<button class="btn btn-success" type="submit">Edit</button>
-			<button class="btn btn-danger" type="submit">Delete</button>
-		</div>
 
 		<script
 			src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -105,104 +105,97 @@
 			crossorigin="anonymous"
 		></script>
 		<script>
-			const submitdoc = async (event) => {
-				const url = 'https://striveschool-api.herokuapp.com/api/product/';
-				event.preventDefault();
-				const doc = {
-					name: document.querySelector('#form-prodact').value,
-					description: document.querySelector('#form-description').value,
-					brand: document.querySelector('#form-brand').value,
-					imageUrl: document.querySelector('#form-image').value,
-					price: document.querySelector('#form-Price').value,
-				};
-				try {
-					const resp = await fetch(url, {
-						method: 'POST',
-						body: JSON.stringify(doc),
+			document
+				.querySelector('.btn-delet')
+				.addEventListener('click', function () {
+					const urlvalue = new URLSearchParams(window.location.search).get(
+						'id',
+					);
+					const url =
+						'https://striveschool-api.herokuapp.com/api/product/' + urlvalue;
+					let dletbtn = document.querySelector('.btn-delet');
+					fetch(url, {
+						methode: 'DELETE',
 						headers: {
 							Authorization:
 								'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTRiMjE0ZDRiYjUzZDAwMTViMTllZDMiLCJpYXQiOjE2MzIzMTM2NzcsImV4cCI6MTYzMzUyMzI3N30.l4N27o8c_KxofK9baoVPZVl8m7XImIMYTEzx6-ecOf8',
-							'Content-Type': 'application/json',
 						},
-					});
-					if (resp.ok) {
-						alert('Product successfully added!!');
-						window.location.assign('/index2.html');
-					}
-				} catch (err) {
-					console.log(err);
+					})
+						.then((res) => console.log(res.json()))
+						.then((data) => {
+							alert('Product successfully deleted!!');
+							window.location.assign('/product.html');
+						})
+						.catch((err) => console.log(err));
+				});
+
+			window.onload = () => {
+				const urlvalue = new URLSearchParams(window.location.search).get('id');
+				const url =
+					'https://striveschool-api.herokuapp.com/api/product/' + urlvalue;
+				let idval = document.querySelector('#form-id');
+				idval.value = urlvalue;
+				let nameval = document.querySelector('#form-prodact');
+				let descriptionval = document.querySelector('#form-description');
+				let brandval = document.querySelector('#form-brand');
+				let imageUrlval = document.querySelector('#form-image');
+				let priceval = document.querySelector('#form-Price');
+
+				function resp() {
+					fetch(url, {
+						methode: 'Get',
+						headers: {
+							Authorization:
+								'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTRiMjE0ZDRiYjUzZDAwMTViMTllZDMiLCJpYXQiOjE2MzIzMTM2NzcsImV4cCI6MTYzMzUyMzI3N30.l4N27o8c_KxofK9baoVPZVl8m7XImIMYTEzx6-ecOf8',
+						},
+					})
+						.then((res) => res.json())
+						.then((data) => {
+							let { name, description, brand, imageUrl, price } = data;
+							nameval.value = name;
+							descriptionval.value = description;
+							brandval.value = brand;
+							imageUrlval.value = imageUrl;
+							priceval.value = price;
+						});
 				}
+
+				const editdoc = async (event) => {
+					const edtbtn = document.querySelector('.btn-edit').value;
+					console.log(idval);
+					const url =
+						'https://striveschool-api.herokuapp.com/api/product/' + value;
+
+					event.preventDefault();
+					const doc = {
+						name: document.querySelector('#form-prodact').value,
+						description: document.querySelector('#form-description').value,
+						brand: document.querySelector('#form-brand').value,
+						imageUrl: document.querySelector('#form-image').value,
+						price: document.querySelector('#form-Price').value,
+					};
+					try {
+						const resp = await fetch(url, {
+							method: 'PUT',
+							body: JSON.stringify(doc),
+							headers: {
+								Authorization:
+									'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTRiMjE0ZDRiYjUzZDAwMTViMTllZDMiLCJpYXQiOjE2MzIzMTM2NzcsImV4cCI6MTYzMzUyMzI3N30.l4N27o8c_KxofK9baoVPZVl8m7XImIMYTEzx6-ecOf8',
+								'Content-Type': 'application/json',
+							},
+						});
+						if (resp.ok) {
+							alert('Product successfully edited!!');
+							window.location.assign('/index2.html');
+						} else {
+							alert('Product deleting failed!!');
+						}
+					} catch (err) {
+						console.log(err);
+					}
+				};
+				resp();
 			};
-
-			// const deletedoc = async (event) => {
-			// 	const delbtn = document.querySelector('#item-to-delete').value;
-			// 	console.log(delbtn);
-			// 	const url =
-			// 		'https://striveschool-api.herokuapp.com/api/product/' + delbtn;
-
-			// 	event.preventDefault();
-			// 	const doc = {
-			// 		name: document.querySelector('#form-prodact').value,
-			// 		description: document.querySelector('#form-description').value,
-			// 		brand: document.querySelector('#form-brand').value,
-			// 		imageUrl: document.querySelector('#form-image').value,
-			// 		price: document.querySelector('#form-Price').value,
-			// 	};
-			// 	try {
-			// 		const resp = await fetch(url, {
-			// 			method: 'DELETE',
-			// 			body: JSON.stringify(doc),
-			// 			headers: {
-			// 				Authorization:
-			// 					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTRiMjE0ZDRiYjUzZDAwMTViMTllZDMiLCJpYXQiOjE2MzIzMTM2NzcsImV4cCI6MTYzMzUyMzI3N30.l4N27o8c_KxofK9baoVPZVl8m7XImIMYTEzx6-ecOf8',
-			// 				'Content-Type': 'application/json',
-			// 			},
-			// 		});
-			// 		if (resp.ok) {
-			// 			alert('Product successfully deleted!!');
-			// 			window.location.assign('/index2.html');
-			// 		} else {
-			// 			alert('Product deleting failed!!');
-			// 		}
-			// 	} catch (err) {
-			// 		console.log(err);
-			// 	}
-			// };
-
-			// const deletedoc = async (event) => {
-			// 	const delbtn = document.querySelector('#item-to-delete').value;
-			// 	console.log(delbtn);
-			// 	const url =
-			// 		'https://striveschool-api.herokuapp.com/api/product/' + delbtn;
-
-			// 	event.preventDefault();
-			// 	const doc = {
-			// 		name: document.querySelector('#form-prodact').value,
-			// 		description: document.querySelector('#form-description').value,
-			// 		brand: document.querySelector('#form-brand').value,
-			// 		imageUrl: document.querySelector('#form-image').value,
-			// 		price: document.querySelector('#form-Price').value,
-			// 	};
-			// 	try {
-			// 		const resp = await fetch(url, {
-			// 			method: 'DELETE',
-			// 			body: JSON.stringify(doc),
-			// 			headers: {
-			// 				Authorization:
-			// 					'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTRiMjE0ZDRiYjUzZDAwMTViMTllZDMiLCJpYXQiOjE2MzIzMTM2NzcsImV4cCI6MTYzMzUyMzI3N30.l4N27o8c_KxofK9baoVPZVl8m7XImIMYTEzx6-ecOf8',
-			// 				'Content-Type': 'application/json',
-			// 			},
-			// 		});
-			// 		if (resp.ok) {
-			// 			alert('Product successfully deleted!!');
-			// 			window.location.assign('/index2.html');
-			// 		} else {
-			// 			alert('Product deleting failed!!');
-			// 		}
-			// 	} catch (err) {
-			// 		console.log(err);
-			// 	}
-			// };
 		</script>
 	</body>
 </html>
