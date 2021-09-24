@@ -12,12 +12,12 @@
 			integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
 			crossorigin="anonymous"
 		/>
-		<title>Edit Items</title>
+		<title>Create Items</title>
 		<style>
 			* {
 				background-color: rgb(5, 5, 5);
 				color: rgb(134, 132, 132);
-				font-weight: bold;
+				font-weight: 300%;
 			}
 			body {
 				background-color: rgb(0, 0, 0);
@@ -39,10 +39,10 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
-					<a class="nav-link" href="/create.html"
-						>Create Item</a
+					<a class="nav-link"
+						>Create Item <span class="sr-only">(current)</span></a
 					>
-					<a class="nav-link" >Edit item <span class="sr-only">(current)</span></a>
+					<a class="nav-link" href="/editpage.html">Edit item</a>
 				</div>
 			</div>
 		</nav>
@@ -110,9 +110,8 @@
 					></textarea>
 				</div>
 			</div>
-			<div class="col-8 d-flex justify-content-between">
-				<button class="btn btn-success btn-edit" type="submit">Edit</button>
-				<button class="btn btn-danger btn-delet" type="button">Delete</button>
+			<div class="col-8 mt-4 d-flex justify-content-center">
+				<button class="btn btn-primary btn-create" type="submit">Create</button>
 			</div>
 		</form>
 
